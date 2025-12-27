@@ -33,4 +33,5 @@ for prompt, output in zip(prompts, outputs):
     print(f"Prompt: {prompt}")
     print(f"Result: {generated_text}...")
     print("-" * 30)
-    
+
+print("END of Inference-TextGeneration.py")
