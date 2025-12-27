@@ -1,6 +1,6 @@
-## Text Generation Inference
+## AI Inference Project
 
-This project demonstrates text generation using Hugging Face `transformers` with the `gpt2` model.
+This project demonstrates text generation and other AI inference tasks using Hugging Face `transformers`. It includes both command-line scripts and an interactive web interface similar to ChatGPT.
 
 ### Prerequisites
 - macOS
@@ -21,7 +21,23 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### Run
+### Web UI (Recommended)
+Launch the interactive chat interface for testing different inferences:
+
+```bash
+python app.py
+```
+
+Then open your browser to `http://localhost:5000`
+
+Features:
+- ChatGPT-like interface for interactive testing
+- Support for multiple inference types (Text Generation, Sentiment Analysis)
+- Configurable seed for reproducible results
+- Adjustable max tokens for text generation
+- Real-time inference testing with different prompts
+
+### Command Line Scripts
 Execute the text generation script:
 
 ```bash
@@ -45,9 +61,12 @@ deactivate
 ```
 
 ### Files
-- `Inference-TextGeneration.py`: Main script that seeds and generates text for two prompts using `gpt2`.
-- `requirements.txt`: Pinned dependencies for reproducible installs.
- - `PROMPTS.md`: Log of session prompts (what you asked) and script input prompts (what the model generates from).
+- `app.py`: Flask web server with chat interface for interactive inference testing
+- `templates/index.html`: ChatGPT-like web UI for testing different inference models
+- `Inference-TextGeneration.py`: Command-line script for text generation with `gpt2`
+- `inference.py`: Command-line script for sentiment analysis
+- `requirements.txt`: Pinned dependencies for reproducible installs
+- `PROMPTS.md`: Log of session prompts (what you asked) and script input prompts (what the model generates from)
 
 ### Prompt Logging CLI
 Use the helper to append prompts to `PROMPTS.md`:
