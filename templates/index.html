@@ -337,8 +337,25 @@
             if (!prompt) return;
 
             const taskType = taskSelect.value;
-            const seed = seedInput.value ? parseInt(seedInput.value) : null;
-            const maxTokens = parseInt(tokensInput.value);
+            const seedValue = seedInput.value.trim();
+            const maxTokensValue = tokensInput.value.trim();
+
+            // Validate seed
+            let seed = null;
+            if (seedValue) {
+                seed = parseInt(seedValue);
+                if (isNaN(seed)) {
+                    alert('Seed must be a valid number');
+                    return;
+                }
+            }
+
+            // Validate max tokens
+            const maxTokens = parseInt(maxTokensValue);
+            if (isNaN(maxTokens) || maxTokens < 10 || maxTokens > 200) {
+                alert('Max tokens must be a number between 10 and 200');
+                return;
+            }
 
             // Add user message
             addMessage('user', prompt);

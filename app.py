@@ -55,8 +55,43 @@ def inference():
         if not prompt:
             return jsonify({'error': 'No prompt provided'}), 400
         
+        # Validate seed and max_tokens
+        if seed is not None:
+            try:
+                seed = int(seed)
+            except (ValueError, TypeError):
+                return jsonify({'error': 'Seed must be a valid integer'}), 400
+        
+        try:
+            max_tokens = int(max_tokens)
+            if max_tokens < 1 or max_tokens > 200:
+                return jsonify({'error': 'Max tokens must be between 1 and 200'}), 400
+        except (ValueError, TypeError):
+            return jsonify({'error': 'Max tokens must be a valid integer'}), 400
+        
+        if not prompt:
+            return jsonify({'error': 'No prompt provided'}), 400
+        
+        # Validate seed and max_tokens
+        if seed is not None:
+            try:
+                seed = int(seed)
+            except (ValueError, TypeError):
+                return jsonify({'error': 'Seed must be a valid integer'}), 400
+        
+        try:
+            max_tokens = int(max_tokens)
+            if max_tokens < 1 or max_tokens > 200:
+                return jsonify({'error': 'Max tokens must be between 1 and 200'}), 400
+        except (ValueError, TypeError):
+            return jsonify({'error': 'Max tokens must be a valid integer'}), 400
+        
         # Get the appropriate model
         model = get_model(task_type)
+        
+        # Helper function for generating mock sentiment scores
+        def get_mock_sentiment_score(base_score=0.85):
+            return base_score + random.random() * 0.1
         
         # Use mock responses if model is not available
         if USE_MOCK or model is None:
@@ -89,13 +124,13 @@ def inference():
                 
                 if pos_count > neg_count:
                     label = "POSITIVE"
-                    score = 0.85 + random.random() * 0.1
+                    score = get_mock_sentiment_score(0.85)
                 elif neg_count > pos_count:
                     label = "NEGATIVE"
-                    score = 0.85 + random.random() * 0.1
+                    score = get_mock_sentiment_score(0.85)
                 else:
                     label = "NEUTRAL"
-                    score = 0.55 + random.random() * 0.1
+                    score = get_mock_sentiment_score(0.55)
                 
                 response_text = f"Sentiment: {label} (Confidence: {score:.4f})"
             
@@ -104,7 +139,11 @@ def inference():
         
         else:
             # Use real models
-            from transformers import set_seed
+            try:
+                from transformers import set_seed
+            except ImportError:
+                print("Failed to import transformers")
+                return jsonify({'error': 'Transformers library not available'}), 500
             
             # Set seed if provided
             if seed is not None:
