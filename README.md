@@ -28,6 +28,11 @@ Launch the interactive chat interface for testing different inferences:
 python app.py
 ```
 
+For development with debug mode enabled:
+```bash
+FLASK_DEBUG=true python app.py
+```
+
 Then open your browser to `http://localhost:5000`
 
 Features:
