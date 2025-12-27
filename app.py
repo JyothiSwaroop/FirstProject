@@ -69,23 +69,6 @@ def inference():
         except (ValueError, TypeError):
             return jsonify({'error': 'Max tokens must be a valid integer'}), 400
         
-        if not prompt:
-            return jsonify({'error': 'No prompt provided'}), 400
-        
-        # Validate seed and max_tokens
-        if seed is not None:
-            try:
-                seed = int(seed)
-            except (ValueError, TypeError):
-                return jsonify({'error': 'Seed must be a valid integer'}), 400
-        
-        try:
-            max_tokens = int(max_tokens)
-            if max_tokens < 1 or max_tokens > 200:
-                return jsonify({'error': 'Max tokens must be between 1 and 200'}), 400
-        except (ValueError, TypeError):
-            return jsonify({'error': 'Max tokens must be a valid integer'}), 400
-        
         # Get the appropriate model
         model = get_model(task_type)
         
