@@ -69,6 +69,29 @@ This file tracks all prompts used to create and iterate on project files. Update
 
 ---
 
+### 6. RunnableWithMessageHistory.py
+**Date:** 2025-12-29
+
+**Purpose:** LangChain conversational memory with message history
+
+**Features:**
+- RunnableWithMessageHistory wrapper for stateful conversations
+- ChatMessageHistory for session-based memory storage
+- ChatPromptTemplate with MessagesPlaceholder
+- Session management with configurable session IDs
+- Multi-turn conversation tracking
+
+**Dependencies Added:**
+- `langchain-community` (for ChatMessageHistory)
+
+**Example Conversation:**
+- Turn 1: "Hi, my name is Dave."
+- Turn 2: "What is my name?" (tests memory recall)
+
+**Session ID:** "user_123" (demonstrates session isolation)
+
+---
+
 ## Git & Project Management
 
 ### 2025-12-27
@@ -78,6 +101,17 @@ This file tracks all prompts used to create and iterate on project files. Update
 - "Can we capture gitignore steps in Wiki page?"
 
 **Created:** GITIGNORE-TEMPLATE.md (Git setup documentation for ML projects)
+
+### 2025-12-29
+**Automation & Workflow:**
+- "How can I automate prompt file update along with project code updates?"
+- "Idea is to have prompt file updated and commit along with code commits."
+- "Can you explain about these changes?" (explained commit-with-prompt.sh workflow)
+
+**Script Updates:**
+- Created RunnableWithMessageHistory.py (conversational memory with LangChain)
+- Installed `langchain-community` package
+- Updated PROMPTS.md automation documentation
 
 ---
 
